@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
       // be sure to include its associated Category and Tag data
       // JOIN with Category
       // JOIN with Tag, using the ProductTag through table
-      include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'product_tags' }]
+      include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'tags' }]
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
       // be sure to include its associated Category and Tag data
       // JOIN with Category
       // JOIN with Tag, using the ProductTag through table
-      include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'product_tags' }]
+      include: [{ model: Category }, { model: Tag, through: ProductTag, as: 'tags' }]
     });
 
     if (!productData) {
@@ -48,6 +48,7 @@ router.post('/', async (req, res) => {
       product_name: "Basketball",
       price: 200.00,
       stock: 3,
+      category_id: 6,
       tagIds: [1, 2, 3, 4]
     }
   */

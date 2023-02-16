@@ -6,7 +6,7 @@
 >
 >**Application Preview:**
 >
->![E-Commerce Back End](./public/assets/images/Note%20Taker.gif "E-Commerce Back End")
+>![E-Commerce Back End](./assets/ "E-Commerce Back End")
 > 
 ## **DESCRIPTION**
 > Topic Assessed: **sequelize** - **sequelize get, post, put, delete API Requests, sequelize Models, dotenv connection, etc.**
