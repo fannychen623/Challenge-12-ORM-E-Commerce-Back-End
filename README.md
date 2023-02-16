@@ -6,7 +6,7 @@
 >
 >**Application Preview:**
 >
->![E-Commerce Back End](./assets/ "E-Commerce Back End")
+>![E-Commerce Back End](./assets/E-Commerce%20Back%20End.gif "E-Commerce Back End")
 > 
 ## **DESCRIPTION**
 > Topic Assessed: **sequelize** - **sequelize get, post, put, delete API Requests, sequelize Models, dotenv connection, etc.**
@@ -45,31 +45,63 @@ THEN I am able to successfully create, update, and delete data in my database
 ## **APPLICATION DETAILS**
 
 ### server.js Information
+* **require**: Defined external and local packages used.
+  * `express`, `routes`, `sequelize`
+* **port**: Defined the default port as 3001
+* **sequelize**: Synced sequelize models to the database and launched the server.
 
 ### models Information
-* **Category.js**: 
+* **Category.js**:
+  * `id`: integer, not null, primary key, auto-increment 
+  * `category_name`: string, not null
 * **Product.js**: 
+  * `id`: integer, not null, primary key, auto-increment 
+  * `product_name`: string, not null
+  * `price`: decimal (precision 10, 2 decimal places), not null, validate decimal 
+  * `stock`: integer, not null, default value 10, validate numeric
+  * `category_id`: integer, references category_id, not unique
 * **Tag.js**: 
+  * `id`: integer, not null, primary key, auto-increment 
+  * `tag_name`: string, not null
 * **ProductTag.js**: 
+  * `id`: integer, not null, primary key, auto-increment 
+  * `product_id`: integer, references product_id, not unique
+  * `tag_id`: integer, references tag_id, not unique
 * **index.js**: 
+  * `Product belongsTo Category`: foreignKey category_id
+  * `Category hasMany Product`: foreignKey category_id, cascade on delete
+  * `Product belongsToMany Tag` through ProductTag, not unique, as 'tags'
+    * foreignKey product_id
+  * `Tag belongsToMany Product` through ProductTag, not unique, as 'products'
+    * foreignKey tag_id
 
 ### routes api Information
-* **category-routes.js**: 
-* **product-routes.js**: 
-* **tag-routes.js**: 
+* **category-routes.js**: `async/await` get, get by id, post, put, and delete requests.
+  * `get`/`get by id`: include [{ model: Product }]
+* **product-routes.js**: `async/await` get, get by id, post, put, and delete requests.
+  * `get`/`get by id`: include [{ model: Category }, { model: Tag, through: ProductTag, as: 'tags' }]
+  * `post`: create/bulkCreate array of tagIds 
+  * `put`: find associated tagIds, filter and create unique array of tadIds, destroy/bulkCreate new array of tagIds
+* **tag-routes.js**: `async/await` get, get by id, post, put, and delete requests.
+  * `get`/`get by id`: include [{ model: Product, through: ProductTag, as: 'products' }] 
+* **index.js**: Define route of api requests.
 
 ### package.json Information
 * **package**: Define the dependencies/packages used in the application.
   * Dependencies: 
-    * `dotenv`, version ^8.2.0
-    * `express`, version ^4.17.1
-    * `mysql2`, version ^2.1.0
-    * `sequelize`, version ^5.21.7
-  * devDependencies: `nodemon`, version ^2.0.3
+    * [dotenv](https://www.npmjs.com/package/dotenv), version ^8.2.0
+    * [express](https://www.npmjs.com/package/express), version ^4.17.1
+    * [mysql2](https://www.npmjs.com/package/mysql), version ^2.1.0
+    * [sequelize](https://www.npmjs.com/package/sequelize), version ^5.21.7
+  * devDependencies:
+    * [nodemon](https://www.npmjs.com/package/nodemon), version ^2.0.3
 
 ## **APPLICATION SAMPLE RUNS**
-### Sample Runs
->![GET Request](./assets/ "GET Request")
->![POST Request](./assets/ "POST Request")
->![PUT Request](./assets/ "PUT Request")
->![DELETE Request](./assets/ "DELETE Request")
+### Categories Requests
+>![Categories](./assets/categories.png "Categories")
+>
+### Products Requests
+>![Products](./assets/products.png "Products")
+>
+### Tags Requests
+>![Tags](./assets/tags.png "Tags")
