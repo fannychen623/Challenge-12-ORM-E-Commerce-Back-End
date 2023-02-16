@@ -9,7 +9,7 @@
 >![E-Commerce Back End](./assets/E-Commerce%20Back%20End.gif "E-Commerce Back End")
 > 
 ## **DESCRIPTION**
-> Topic Assessed: **sequelize** - **sequelize get, post, put, delete API Requests, sequelize Models, dotenv connection, etc.**
+> Topic Assessed: **sequelize & ORM** - **sequelize get, post, put, delete API Requests, sequelize Models, dotenv connection, etc.**
 ### **My Task**
 *E-Commerce Back End* allows a user to add, pull, update, and delete information from the database using sequelize.
 > Modify starter code.
